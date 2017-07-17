@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Hello Thymeleaf!</title>
+    <link rel="stylesheet" href="../static/bootstrap.css" th:href="@{/bootstrap.css}" />
+    <script type="text/javascript" src="/static/angular.min.js" th:src="@{/angular.min.js}"></script>
+    <script type="text/javascript" src="/static/app/app.module.js" th:src="@{/app/app.module.js}"></script>
+    <script type="text/javascript" src="/static/app/houseimage.controller.js" th:src="@{/app/houseimage.controller.js}"></script>
+    <base href="/" />
+</head>
+<body ng-app="app" ng-controller="HouseImagesController as vm">
+<p th:text="'HouseImage, ' + ${houseId} + '!'" />
+
+<div data-ng-init="vm.init('${houseId}')">
+
+    <div class="row">
+        <div class="col-lg-offset-2 col-lg-8">
+            <!-- Get all bookings or only affordable ones -->
+            <!--    <div class="btn-group" role="group">
+                    <button ng-click="vm.getAll()" type="button" class="btn btn-default">All</button>
+                    <button ng-click="vm.getAffordable()" type="button" class="btn btn-default">Less than 100$</button>
+                </div>-->
+
+            <!-- Display bookings in a table -->
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Counter</th>
+
+                    <th style="width: 90px"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="houseImage in vm.houseImages">
+                   <td>{{houseImage.counter}}+''</td>
+                  <td>
+                  <img src="http://localhost:8090/returnImage/{{houseImage.counter}}/{{houseImage.imageId}}" class="img-rounded" alt="Cinque Terre" width="304" height="236" />
+                 </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
